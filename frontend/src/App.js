@@ -1,26 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {connect} from 'react-redux';
+import MessageList from './components/chatroom/MessageList'
+import TextBox from './components/chatroom/TextBox'
+import SignIn from './components/auth/SignIn'
+import SignUp from './components/auth/SignUp'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends React.Component {
+
+  render() {
+    const { auth, profile } = this.props;
+    if (auth.uid) {
+      return (
+        <div className="App">
+          <div className="message">
+            <MessageList
+              chatroomId={this.state.chatroom_id}
+              key={this.state.chatroom_id}
+            />
+          </div>
+          <div className="Text">
+            <TextBox
+              chatroomId={this.state.chatroom_id}
+              key={this.state.chatroom_id}
+            />
+          </div>
+        </div>
+      )
+    } else
+      return (
+        <SignIn />
+      )
+  }
 }
-
-export default App;
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
+  }
+}
+export default connect(mapStateToProps)(App);

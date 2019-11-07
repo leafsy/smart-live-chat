@@ -1,4 +1,5 @@
 import authReducer from './authReducer';
+import chatReducer from './chatReducer';
 import { combineReducers } from 'redux';
 import { firestoreReducer } from 'redux-firestore'
 import { firebaseReducer} from 'react-redux-firebase'; // imported on user auth
@@ -7,6 +8,7 @@ import { firebaseReducer} from 'react-redux-firebase'; // imported on user auth
 // firebaseReducer is to sync user auth 
 const rootReducer = combineReducers({
     auth: authReducer,
+    rootChat: chatReducer,
     firestore: firestoreReducer,
     firebase: firebaseReducer
 })
