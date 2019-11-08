@@ -1,25 +1,17 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
+  "manifest_version": 2,
+  "name": "Smart Chat",
+  "description": "Chrome Extension that will allow users to be subgrouped into smaller chat groups",
+  "version": "1.0",
+  "browser_action": {},
+  "content_scripts": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "matches": ["https://www.youtube.com/live_chat*"],
+      "all_frames": true,
+      "js": ["content-scripts.js"]
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "web_accessible_resources": ["index.html"],
+  "permissions": ["storage", "<all_urls>"],
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'"
 }
