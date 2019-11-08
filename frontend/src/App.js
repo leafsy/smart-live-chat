@@ -5,7 +5,7 @@ import MessageList from './components/chatroom/MessageList'
 import TextBox from './components/chatroom/TextBox'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
-
+import ChatRoom from './components/chatroom/ChatRoom';
 
 class App extends React.Component {
 
