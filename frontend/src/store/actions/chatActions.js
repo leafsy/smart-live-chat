@@ -1,11 +1,11 @@
 export const sendMessage = (message) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firestore = getFirestore();
-        var ref = firestore.collection('events').doc();
+        var ref = firestore.collection('chatroom').doc();
         var unix = Date.now()
         var unixid = unix.toString() + '-' + ref.id.toString()
         // console.log(unixid)
-        firestore.collection('chatrooms').doc(message.eId).collection('messages').doc(unixid).set(
+        firestore.collection('chatrooms').doc(message.vId).collection('messages').doc(unixid).set(
             {
                 ...message,
                 createdAt: new Date()

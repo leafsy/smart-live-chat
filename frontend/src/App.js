@@ -5,7 +5,7 @@ import MessageList from './components/chatroom/MessageList'
 import TextBox from './components/chatroom/TextBox'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
-
+import ChatRoom from './components/chatroom/ChatRoom';
 
 class App extends React.Component {
 
@@ -13,20 +13,7 @@ class App extends React.Component {
     const { auth, profile } = this.props;
     if (auth.uid) {
       return (
-        <div className="App">
-          <div className="message">
-            <MessageList
-              chatroomId={this.state.chatroom_id}
-              key={this.state.chatroom_id}
-            />
-          </div>
-          <div className="Text">
-            <TextBox
-              chatroomId={this.state.chatroom_id}
-              key={this.state.chatroom_id}
-            />
-          </div>
-        </div>
+        <ChatRoom />
       )
     } else
       return (
