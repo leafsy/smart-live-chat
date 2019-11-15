@@ -6,6 +6,10 @@ import { sendMessage, getMessages } from "../../store/actions/chatActions";
 import MessageList from "./MessageList";
 
 class ChatRoom extends Component {
+  constructor(props) {
+    super(props);
+    this.props.getMessages();
+  }
   handleSendMessage = (e, msg) => {
     e.preventDefault();
     // this.textBox.current.cleanBox();
@@ -15,20 +19,14 @@ class ChatRoom extends Component {
       this.askSignIn();
       console.log("Please sign in! ");
     } else {
-      var message = {
-        eId: this.props.eventId,
-        body: msg.body,
-        userId: auth.uid,
-        userName: auth.displayName,
-        vid: "1234"
-      };
+      var message = msg.body;
       this.props.sendMessage(message);
       console.log("submitted!");
     }
   };
   render() {
     const { event, auth, chatroom, messages } = this.props;
-    this.props.getMessages();
+    // this.props.getMessages();
     var messages_arr = [];
     if (messages) {
       messages_arr = Object.values(messages);
@@ -60,6 +58,7 @@ const mapStateToProps = (state, ownProps) => {
   const chatroom = chatrooms ? chatrooms[id] : null;
   //   const messages = state.firestore.data.messages;
   const messages = state.rootChat.messages;
+  console.log(state.firestore);
   return {
     event: event,
     chatroom: chatroom,

@@ -1,26 +1,33 @@
 export const sendMessage = message => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    var ref = firestore.collection("chatroom").doc();
-    var unix = Date.now();
-    var unixid = unix.toString() + "-" + ref.id.toString();
-    // console.log(unixid)
-    firestore
+    var chatroom = firestore
+      .collection("chatrooms")
+      .doc("Q3w70iDpBp7VlCl793LH");
+    // create unique message id by the chatroom id and time
+    var timeStamp = Date.now();
+    var uniqueID = chatroom.id.toString() + "-" + timeStamp.toString();
+    // add a new message doc into this chatroom
+    var messageRef = firestore
       .collection("chatrooms")
       .doc("Q3w70iDpBp7VlCl793LH")
       .collection("messages")
-      .doc(unixid)
+      .doc(uniqueID);
+
+    messageRef
       .set({
-        ...message,
-        createdAt: new Date()
+        content: message,
+        timeStamp: timeStamp
       })
       .then(() => {
+        console.log("message successfully written!");
         dispatch({
           type: "SEND_MESSAGE",
           message
         });
       })
       .catch(err => {
+        console.error("Error writing document: ", err);
         dispatch({
           type: "SEND_MESSAGE_ERROR",
           err
@@ -29,6 +36,8 @@ export const sendMessage = message => {
   };
 };
 
+// serve as a background process to listen to DB
+// and get realtime updates
 export const getMessages = () => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
@@ -41,16 +50,31 @@ export const getMessages = () => {
     messages
       .orderBy("timeStamp")
       .limit(100)
-      .onSnapshot(querySnapshot => {
-        var newMessages = [];
-        querySnapshot.forEach(doc => {
-          console.log(doc.data().content);
-          newMessages.push(doc.data().content);
+      .onSnapshot(snapshot => {
+        var updateMessages = [];
+        snapshot.docChanges().forEach(change => {
+          if (change.type === "added") {
+            console.log(change.doc.data());
+            updateMessages.push(change.doc.data().content);
+          }
         });
+        console.log(updateMessages);
         dispatch({
-          type: "GET_MESSAGES",
-          newMessages
+          type: "DETECT_MESSAGES_UPDATE",
+          updateMessages
         });
       });
   };
 };
+
+// snapshot.docChanges().forEach(function(change) {
+//   if (change.type === "added") {
+//     console.log("New city: ", change.doc.data());
+//   }
+//   if (change.type === "modified") {
+//     console.log("Modified city: ", change.doc.data());
+//   }
+//   if (change.type === "removed") {
+//     console.log("Removed city: ", change.doc.data());
+//   }
+// });

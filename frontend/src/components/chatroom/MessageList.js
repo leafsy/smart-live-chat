@@ -12,8 +12,8 @@ class MessageList extends Component {
     console.log(messages_arr);
     return (
       <div>
-        {messages_arr.map(message => (
-          <p>{message}</p>
+        {messages_arr.map((message, index) => (
+          <p key={index}>{message}</p>
         ))}
       </div>
     );
