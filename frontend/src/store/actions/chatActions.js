@@ -8,19 +8,16 @@ export const sendMessage = message => {
     var timeStamp = Date.now();
     var uniqueID = chatroom.id.toString() + "-" + timeStamp.toString();
     // add a new message doc into this chatroom
-    var messageRef = firestore
+    firestore
       .collection("chatrooms")
       .doc("Q3w70iDpBp7VlCl793LH")
       .collection("messages")
-      .doc(uniqueID);
-
-    messageRef
-      .set({
+      .add({
         content: message,
-        timeStamp: timeStamp
+        timeStamp: timeStamp,
       })
-      .then(() => {
-        console.log("message successfully written!");
+      .then(messageRef =>{
+        console.log("Message successfully written: ", messageRef.id);
         dispatch({
           type: "SEND_MESSAGE",
           message
@@ -33,6 +30,32 @@ export const sendMessage = message => {
           err
         });
       });
+
+    // var messageRef = firestore
+    //   .collection("chatrooms")
+    //   .doc("Q3w70iDpBp7VlCl793LH")
+    //   .collection("messages")
+    //   .doc(uniqueID);
+
+    // messageRef
+    //   .set({
+    //     content: message,
+    //     timeStamp: timeStamp
+    //   })
+    //   .then(() => {
+    //     console.log("message successfully written!");
+    //     dispatch({
+    //       type: "SEND_MESSAGE",
+    //       message
+    //     });
+    //   })
+    //   .catch(err => {
+    //     console.error("Error writing document: ", err);
+    //     dispatch({
+    //       type: "SEND_MESSAGE_ERROR",
+    //       err
+    //     });
+    //   });
   };
 };
 
