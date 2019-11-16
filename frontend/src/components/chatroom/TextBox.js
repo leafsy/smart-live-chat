@@ -23,7 +23,10 @@ class TextBox extends Component {
         return (
             <div className="textbox" id="textbox">
                 <img src="" />
-                <form onSubmit={(e) => this.props.handleSendMessage(e, this.state)}>
+                <form onSubmit={(e) => {this.props.handleSendMessage(e, this.state);
+                    this.cleanBox();
+                    }
+                }>
                     <input className="textbox-input"
                         type="text" id="text"
                         value={this.state.body}
