@@ -20,7 +20,7 @@ class ChatRoom extends Component {
       console.log("Please sign in! ");
     } else {
       var message = msg.body;
-      this.props.sendMessage(message);
+      this.props.sendMessage(this.props.email, message);
       console.log("submitted!");
     }
   };
@@ -58,17 +58,19 @@ const mapStateToProps = (state, ownProps) => {
   const chatroom = chatrooms ? chatrooms[id] : null;
   //   const messages = state.firestore.data.messages;
   const messages = state.rootChat.messages;
+  const email = state.firebase.auth.email;
   console.log(state.firestore);
   return {
     event: event,
     chatroom: chatroom,
     messages: messages,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    email: email
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    sendMessage: message => dispatch(sendMessage(message)),
+    sendMessage: (email, message) => dispatch(sendMessage(email, message)),
     getMessages: () => dispatch(getMessages())
   };
 };

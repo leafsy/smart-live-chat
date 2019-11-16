@@ -1,4 +1,4 @@
-export const sendMessage = message => {
+export const sendMessage = (email, message) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     var chatroom = firestore
@@ -13,10 +13,11 @@ export const sendMessage = message => {
       .doc("Q3w70iDpBp7VlCl793LH")
       .collection("messages")
       .add({
+        email: email,
         content: message,
-        timeStamp: timeStamp,
+        timeStamp: timeStamp
       })
-      .then(messageRef =>{
+      .then(messageRef => {
         console.log("Message successfully written: ", messageRef.id);
         dispatch({
           type: "SEND_MESSAGE",
@@ -78,7 +79,9 @@ export const getMessages = () => {
         snapshot.docChanges().forEach(change => {
           if (change.type === "added") {
             console.log(change.doc.data());
-            updateMessages.push(change.doc.data().content);
+            updateMessages.push(
+              change.doc.data().email + ": " + change.doc.data().content
+            );
           }
         });
         console.log(updateMessages);
