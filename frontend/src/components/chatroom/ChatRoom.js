@@ -3,6 +3,7 @@ import "../style.css";
 import TextBox from "./TextBox";
 import { connect } from "react-redux";
 import { sendMessage, getMessages } from "../../store/actions/chatActions";
+import { signOut } from "../../store/actions/authActions";
 import MessageList from "./MessageList";
 
 class ChatRoom extends Component {
@@ -43,6 +44,7 @@ class ChatRoom extends Component {
             handleSendMessage={this.handleSendMessage}
           />
         </div>
+        <button onClick={this.props.signOut}>sign out</button>
       </div>
     );
   }
@@ -71,7 +73,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     sendMessage: (email, message) => dispatch(sendMessage(email, message)),
-    getMessages: () => dispatch(getMessages())
+    getMessages: () => dispatch(getMessages()),
+    signOut: () => dispatch(signOut())
   };
 };
 
