@@ -11,7 +11,10 @@
       "js": ["content-scripts.js"]
     }
   ],
-  "web_accessible_resources": ["index.html","signin","signup"],
+  "web_accessible_resources": ["index.html"],
+  "background": {
+    "scripts": ["app/background.js"]
+  },
   "permissions": ["storage", "<all_urls>"],
-  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'sha256-AprQxob9JEF7skTihDV2ZQlyIADao5F7oYgcs/yg6XQ='"
 }
