@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import MessageList from "./components/chatroom/MessageList";
 import TextBox from "./components/chatroom/TextBox";
 import SignIn from "./components/auth/SignIn";
+import Admin from "./components/admin/Admin";
 import SignUp from "./components/auth/SignUp";
 import ChatRoom from "./components/chatroom/ChatRoom";
 
