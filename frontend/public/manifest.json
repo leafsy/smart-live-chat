@@ -11,7 +11,7 @@
       "js": ["content-scripts.js"]
     }
   ],
-  "web_accessible_resources": ["index.html"],
+  "web_accessible_resources": ["index.html","signin","signup"],
   "permissions": ["storage", "<all_urls>"],
   "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'"
 }
