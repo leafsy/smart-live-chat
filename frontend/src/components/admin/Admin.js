@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import "../style.css";
 import AlgorithmBox from "./AlgorithmBox";
+import Checkbox from "./Checkbox";
+import EmailMsgBox from "./EmailMsgBox";
 import { getSessions, getAlgorithms,sendMessageAtT} from "../../store/actions/adminActions";
+import { sendMessage } from "../../store/actions/chatActions";
 import { connect } from "react-redux";
 import { signOut } from "../../store/actions/authActions";
-import Checkbox from "./Checkbox";
+
 
 class Admin extends Component {
 
@@ -61,6 +64,11 @@ class Admin extends Component {
       }
     }));
 
+  };
+
+  handleSendMessage = (e, box) => {
+    e.preventDefault();
+    this.props.sendMessage(box.email, box.content);
   };
 
   render() {
@@ -133,8 +141,10 @@ class Admin extends Component {
           <button onClick={this.pause}>Pause</button>
         </div>
 
+        <div className="row">
+          <EmailMsgBox/>
+        </div>
 
-      
       </div>
     );
   
@@ -152,6 +162,7 @@ const mapStateToProps = (state, ownProps) => {
 // have access to signIn into our props
 const mapDispatchToProps = dispatch => {
   return {
+    sendMessage: (email, message) => dispatch(sendMessage(email, message)),
     getSessions: () => dispatch(getSessions()),
     getAlgorithms: () => dispatch(getAlgorithms()),
     sendMessageAtT: (chatrooms,offset) => dispatch(sendMessageAtT(chatrooms,offset)),

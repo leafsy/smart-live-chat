@@ -9,11 +9,15 @@ import MessageList from "./MessageList";
 class ChatRoom extends Component {
   constructor(props) {
     super(props);
+
+    const {videoId,uid} = props;
+
+    this.props.getChatroomId();
     this.props.getMessages();
   }
+  
   handleSendMessage = (e, msg) => {
     e.preventDefault();
-    // this.textBox.current.cleanBox();
     const auth = this.props.auth;
     console.log(auth);
     if (!auth.uid) {
@@ -61,13 +65,15 @@ const mapStateToProps = (state, ownProps) => {
   //   const messages = state.firestore.data.messages;
   const messages = state.rootChat.messages;
   const email = state.firebase.auth.email;
+  const uid = state.firebase.auth.uid;
   console.log(state.firestore);
   return {
     event: event,
     chatroom: chatroom,
     messages: messages,
     auth: state.firebase.auth,
-    email: email
+    email: email,
+    uid:uid
   };
 };
 const mapDispatchToProps = dispatch => {
