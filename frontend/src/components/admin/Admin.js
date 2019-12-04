@@ -35,6 +35,10 @@ class Admin extends Component {
             <SessionBox sessions={sessions} />
         </div>
 
+        <div className="row">
+          Algorithms       
+        </div>
+
         {algos}
 
         <div className="row">
