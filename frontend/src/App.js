@@ -13,7 +13,12 @@ class App extends React.Component {
     const { auth, profile } = this.props;
 
     if (auth.uid) {
-      return <ChatRoom />;
+      if(auth.uid ==  'roB7fvV8KGWhIlP07T6LPa6IPNb2'){
+        return <Admin/>;
+      }else{
+        return <ChatRoom />;
+      }
+      
     } else return <SignIn />;
   }
 }

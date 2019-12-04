@@ -1,0 +1,13 @@
+.row {
+  display: flex;
+  padding-top: 15px;
+  width: 800px;
+}
+
+.column {
+  flex: 50%;
+}
+
+th, td {
+  padding: 15px;
+}
