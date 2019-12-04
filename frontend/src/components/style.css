@@ -6,8 +6,15 @@
 
 .column {
   flex: 50%;
+
 }
 
 th, td {
   padding: 15px;
+}
+
+.divider{
+  width:15px;
+  height:auto;
+  display:inline-block;
 }

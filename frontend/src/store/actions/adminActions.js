@@ -8,8 +8,6 @@ export const getSessions = () => {
     chatrooms.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, " => ", doc.data());
-
           var session = {platform: doc.data().platform, streamid:doc.data().vid, chatroomid: doc.id}
           sessions.push(session);
       });
@@ -36,8 +34,6 @@ export const getAlgorithms = () => {
     .get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, " => ", doc.data());
-
           var algorithm = {id: doc.id, selected: doc.data().selected}
           algorithms.push(algorithm);
       });
@@ -99,4 +95,38 @@ export const updateSelectedAlgorithm = (selectedAlgorithm) => {
   };
 };
 
+//get algorithms list
+export const sendMessageAtT = (chatrooms,offset) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    firestore.collection("bulkloadmessages").where("offset", "==", offset)
+    .get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          var message = {content: doc.data().content, email:doc.data().email}
+          console.log(message)
 
+          chatrooms.forEach(chatroomid => {
+            var timeStamp = Date.now();
+            // add a new message doc into this chatroom
+            firestore
+            .collection("chatrooms")
+            .doc(chatroomid)
+            .collection("messages")
+            .add({
+              email: doc.data().email,
+              content: doc.data().content,
+              timeStamp: timeStamp
+            })
+            .catch(err => {
+              console.error("Error writing document: ", err);
+              dispatch({
+                type: "SEND_MESSAGE_ERROR",
+                err
+              });
+             });
+            });
+    });
+   });
+  };
+}

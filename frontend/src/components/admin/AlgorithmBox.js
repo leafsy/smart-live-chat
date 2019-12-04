@@ -11,15 +11,9 @@ class AlgorithmBox extends Component {
   constructor(props) {
     super(props);
     // Don't call this.setState() here!
-    console.log("=====constructor=====")
-    console.log(props)
-
     const {algorithms} = props;
 
-    console.log("getDerivedStateFromProps")
-    console.log(props)
     algorithms.map((algorithm) => {
-      console.log(algorithm.id + ": " +algorithm.selected)
       if(algorithm.selected){
         this.state = {
           selectedAlgorithm : algorithm.id
