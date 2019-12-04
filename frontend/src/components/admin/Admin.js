@@ -87,7 +87,6 @@ class Admin extends Component {
                         <th>Stream id</th>
                         <th>Chat Room</th>
                     </tr>
-
                     {sessions.map((session,index) => (
                         <tr key={index}>
                             <th>
@@ -101,12 +100,9 @@ class Admin extends Component {
                             <th>{session.streamid}</th>
                             <th>{session.chatroomid}</th>
                         </tr>
-
                     ))}
                 </tbody>
             </table>
-            <button onClick={this.print}>print</button>
-        
         </div>
       </div>
     } 
