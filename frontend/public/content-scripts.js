@@ -17,8 +17,8 @@ var hasLiveStream = document.getElementsByTagName(
 if (hasLiveStream && videoId) {
   var liveChat = document.getElementsByTagName("yt-live-chat-renderer")[0];
   var overlay = document.createElement("iframe");
-  overlay.src = chrome.extension.getURL("index.html");
-  // overlay.src = chrome.extension.getURL("index.html?v=" + videoId);
+  // overlay.src = chrome.extension.getURL("index.html");
+  overlay.src = chrome.extension.getURL("index.html?v=" + videoId);
   liveChat.append(overlay);
   overlay.style.width = "100%";
   overlay.style.height = "100%";

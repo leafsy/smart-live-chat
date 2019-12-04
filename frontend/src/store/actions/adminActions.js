@@ -120,10 +120,6 @@ export const sendMessageAtT = (chatrooms,offset) => {
             })
             .catch(err => {
               console.error("Error writing document: ", err);
-              dispatch({
-                type: "SEND_MESSAGE_ERROR",
-                err
-              });
              });
             });
     });

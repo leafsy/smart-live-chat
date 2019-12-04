@@ -5,12 +5,13 @@ import MessageList from "./components/chatroom/MessageList";
 import TextBox from "./components/chatroom/TextBox";
 import SignIn from "./components/auth/SignIn";
 import Admin from "./components/admin/Admin";
+import {getChatroomId} from "./store/actions/chatActions";
 import SignUp from "./components/auth/SignUp";
 import ChatRoom from "./components/chatroom/ChatRoom";
 
 class App extends React.Component {
   state = {
-    videoId: undefined,
+    chatroomId: undefined,
   };
 
   render() {
@@ -20,18 +21,38 @@ class App extends React.Component {
       if(auth.uid ==  'roB7fvV8KGWhIlP07T6LPa6IPNb2'){
         return <Admin/>;
       }else{
-        return <ChatRoom videoId={'a123456'}/>;
+        if(this.props.chatroomId){
+          return <ChatRoom chatroomId={this.props.chatroomId}/>;
+        }else{
+          return null
+        }
         // return <ChatRoom videoId={this.state.videoId}/>;
       }
-      
-    } else return <SignIn />;
+    } else {
+      return <SignIn />;
+    }
   }
 
   componentDidMount() {
     let search = window.location.search;
     let params = new URLSearchParams(search);
     let videoId = params.get("v");
-    this.setState({...this.state, videoId: videoId})
+    // videoId='a123456'
+    console.log("===componentDidMount===",videoId,this.props.uid)
+    if(this.props.uid){
+      this.props.getChatroomId(videoId,this.props.uid)
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    let search = window.location.search;
+    let params = new URLSearchParams(search);
+    let videoId = params.get("v");
+
+    console.log("===componentDidUpdate===",videoId,this.props.uid)
+    if(this.props.uid){
+      this.props.getChatroomId(videoId,this.props.uid)
+    }
   }
 
 }
@@ -40,9 +61,17 @@ const mapStateToProps = state => {
   console.log(state.firebase.profile);
   return {
     auth: state.firebase.auth,
-    profile: state.firebase.profile
+    profile: state.firebase.profile,
+    uid: state.firebase.auth.uid,
+    chatroomId: state.rootChat.chatroomId
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getChatroomId: (videoId, chatroomId) => dispatch(getChatroomId(videoId, chatroomId)),
   };
 };
 
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps,mapDispatchToProps)(App);

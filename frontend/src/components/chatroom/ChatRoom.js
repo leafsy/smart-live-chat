@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../style.css";
 import TextBox from "./TextBox";
 import { connect } from "react-redux";
-import { sendMessage, getMessages } from "../../store/actions/chatActions";
+import { sendMessage,getMessages} from "../../store/actions/chatActions";
 import { signOut } from "../../store/actions/authActions";
 import MessageList from "./MessageList";
 
@@ -10,10 +10,8 @@ class ChatRoom extends Component {
   constructor(props) {
     super(props);
 
-    const {videoId,uid} = props;
-
-    this.props.getChatroomId();
-    this.props.getMessages();
+    const {chatroomId} = props;
+    this.props.getMessages(chatroomId)
   }
   
   handleSendMessage = (e, msg) => {
@@ -25,13 +23,12 @@ class ChatRoom extends Component {
       console.log("Please sign in! ");
     } else {
       var message = msg.body;
-      this.props.sendMessage(this.props.email, message);
+      this.props.sendMessage(this.props.email, message, this.props.chatroomId);
       console.log("submitted!");
     }
   };
   render() {
     const { event, auth, chatroom, messages } = this.props;
-    // this.props.getMessages();
     var messages_arr = [];
     if (messages) {
       messages_arr = Object.values(messages);
@@ -65,22 +62,19 @@ const mapStateToProps = (state, ownProps) => {
   //   const messages = state.firestore.data.messages;
   const messages = state.rootChat.messages;
   const email = state.firebase.auth.email;
-  const uid = state.firebase.auth.uid;
-  console.log(state.firestore);
   return {
     event: event,
     chatroom: chatroom,
     messages: messages,
     auth: state.firebase.auth,
     email: email,
-    uid:uid
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    sendMessage: (email, message) => dispatch(sendMessage(email, message)),
-    getMessages: () => dispatch(getMessages()),
-    signOut: () => dispatch(signOut())
+    sendMessage: (email, message, chatroomId) => dispatch(sendMessage(email, message, chatroomId)),
+    getMessages: (chatroomId) => dispatch(getMessages(chatroomId)),
+     signOut: () => dispatch(signOut())
   };
 };
 

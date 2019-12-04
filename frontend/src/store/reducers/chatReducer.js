@@ -1,6 +1,7 @@
 const initState = {
   chatError: null,
-  messages: []
+  messages: [],
+  chatroomId: null
 };
 const chatReducer = (state = initState, action) => {
   switch (action.type) {
@@ -28,6 +29,11 @@ const chatReducer = (state = initState, action) => {
         chatError: null,
         messages: newMessages
       };
+    case "LOAD_CHATROOM":
+      return{
+        ...state,
+        chatroomId: action.chatroomId
+      }
     default:
       return state;
   }

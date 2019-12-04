@@ -1,16 +1,16 @@
-export const sendMessage = (email, message) => {
+export const sendMessage = (email, message, chatroomId) => {  
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     var chatroom = firestore
       .collection("chatrooms")
-      .doc("Q3w70iDpBp7VlCl793LH");
+      .doc(chatroomId);
     // create unique message id by the chatroom id and time
     var timeStamp = Date.now();
     var uniqueID = chatroom.id.toString() + "-" + timeStamp.toString();
     // add a new message doc into this chatroom
     firestore
       .collection("chatrooms")
-      .doc("Q3w70iDpBp7VlCl793LH")
+      .doc(chatroomId)
       .collection("messages")
       .add({
         email: email,
@@ -31,44 +31,19 @@ export const sendMessage = (email, message) => {
           err
         });
       });
-
-    // var messageRef = firestore
-    //   .collection("chatrooms")
-    //   .doc("Q3w70iDpBp7VlCl793LH")
-    //   .collection("messages")
-    //   .doc(uniqueID);
-
-    // messageRef
-    //   .set({
-    //     content: message,
-    //     timeStamp: timeStamp
-    //   })
-    //   .then(() => {
-    //     console.log("message successfully written!");
-    //     dispatch({
-    //       type: "SEND_MESSAGE",
-    //       message
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.error("Error writing document: ", err);
-    //     dispatch({
-    //       type: "SEND_MESSAGE_ERROR",
-    //       err
-    //     });
-    //   });
   };
 };
 
 // serve as a background process to listen to DB
 // and get realtime updates
-export const getMessages = () => {
+export const getMessages = (chatroomId) => {
+  console.log(chatroomId)
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
 
     var messages = firestore
       .collection("chatrooms")
-      .doc("Q3w70iDpBp7VlCl793LH")
+      .doc(chatroomId)
       .collection("messages");
 
     messages
@@ -93,14 +68,40 @@ export const getMessages = () => {
   };
 };
 
-// snapshot.docChanges().forEach(function(change) {
-//   if (change.type === "added") {
-//     console.log("New city: ", change.doc.data());
-//   }
-//   if (change.type === "modified") {
-//     console.log("Modified city: ", change.doc.data());
-//   }
-//   if (change.type === "removed") {
-//     console.log("Removed city: ", change.doc.data());
-//   }
-// });
+export const getChatroomId= (vid,uid) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    firestore.collection("algorithms")
+    .get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(algoDoc) {
+          // doc.data() is never undefined for query doc snapshots
+          if(algoDoc.data().selected){
+            firestore.collection("algorithms").doc(algoDoc.id)
+            .collection("map").where("vid", "==", vid).where("uid", "==", uid)
+            .get().then(function(querySnapshot) {
+              if(querySnapshot.docs.length == 0){
+                console.log("Uid: " + uid + " Vid: " + vid + " Not exist in " +algoDoc.id)
+              }else if(querySnapshot.docs.length > 1){
+                console.log("Uid: " + uid + " Vid: " + vid + "has multiple entry in " +algoDoc.id)
+                querySnapshot.forEach(function(doc) {
+                  console.log(doc.id)
+                })
+              }else{
+                console.log("Chatroom found! " + querySnapshot.docs[0].data().cid)
+                const chatroomId = querySnapshot.docs[0].data().cid;
+                dispatch({
+                  type: "LOAD_CHATROOM",
+                  chatroomId: chatroomId
+                })
+              }
+              
+            })
+          }
+      });
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+
+
+  };
+};
