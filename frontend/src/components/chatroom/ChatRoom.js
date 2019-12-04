@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../style.css";
 import TextBox from "./TextBox";
 import { connect } from "react-redux";
-import { sendMessage,getMessages} from "../../store/actions/chatActions";
+import { sendMessage,getMessages,clearMessage} from "../../store/actions/chatActions";
 import { signOut } from "../../store/actions/authActions";
 import MessageList from "./MessageList";
 
@@ -27,6 +27,12 @@ class ChatRoom extends Component {
       console.log("submitted!");
     }
   };
+
+  onClick= (e)=>{
+    this.props.signOut();
+    this.props.clearMessage();
+  }
+
   render() {
     const { event, auth, chatroom, messages } = this.props;
     var messages_arr = [];
@@ -45,7 +51,7 @@ class ChatRoom extends Component {
             handleSendMessage={this.handleSendMessage}
           />
         </div>
-        <button onClick={this.props.signOut}>sign out</button>
+        <button onClick={this.onClick}>sign out</button>
       </div>
     );
   }
@@ -74,7 +80,8 @@ const mapDispatchToProps = dispatch => {
   return {
     sendMessage: (email, message, chatroomId) => dispatch(sendMessage(email, message, chatroomId)),
     getMessages: (chatroomId) => dispatch(getMessages(chatroomId)),
-     signOut: () => dispatch(signOut())
+    clearMessage: () => dispatch(clearMessage()),
+    signOut: () => dispatch(signOut())
   };
 };
 

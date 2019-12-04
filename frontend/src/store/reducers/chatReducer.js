@@ -34,6 +34,12 @@ const chatReducer = (state = initState, action) => {
         ...state,
         chatroomId: action.chatroomId
       }
+    case "CLEAR_MESSAGE":
+        return {
+          ...state,
+          chatError: null,
+          messages: []
+        };
     default:
       return state;
   }

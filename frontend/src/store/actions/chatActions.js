@@ -34,6 +34,14 @@ export const sendMessage = (email, message, chatroomId) => {
   };
 };
 
+export const clearMessage = () => {  
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    dispatch({
+      type: "CLEAR_MESSAGE",
+    });
+  };
+};
+
 // serve as a background process to listen to DB
 // and get realtime updates
 export const getMessages = (chatroomId) => {
