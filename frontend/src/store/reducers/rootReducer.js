@@ -10,6 +10,7 @@ import { firebaseReducer} from 'react-redux-firebase'; // imported on user auth
 const rootReducer = combineReducers({
     auth: authReducer,
     rootChat: chatReducer,
+    adminReducer: adminReducer,
     firestore: firestoreReducer,
     firebase: firebaseReducer
 })

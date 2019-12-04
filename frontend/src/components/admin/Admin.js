@@ -68,7 +68,13 @@ class Admin extends Component {
 
   handleSendMessage = (e, box) => {
     e.preventDefault();
-    this.props.sendMessage(box.email, box.content);
+
+    Object.keys(this.state.checkboxes)
+        .filter(checkbox => this.state.checkboxes[checkbox])
+        .forEach(checkbox => {
+          this.props.sendMessage(box.email, box.content,checkbox);
+        });
+    // this.props.sendMessage(box.email, box.content);
   };
 
   render() {
@@ -118,19 +124,20 @@ class Admin extends Component {
     return (
       <div>
         <div className="row">
-          <div className="column">AvailableSettions</div>
+          <div className="column">Algorithms</div>
           <div className="column">
           <button onClick={this.props.signOut}>sign out</button>
           </div>
         </div>
 
-        {sessionDiv}
+        
+        {algoDiv}
 
         <div className="row">
-          Algorithms       
+          Avalaible Chatrooms:       
         </div>
 
-        {algoDiv}
+        {sessionDiv}
 
         <div className="row">
           Send bulk messages from FireBase
@@ -142,7 +149,7 @@ class Admin extends Component {
         </div>
 
         <div className="row">
-          <EmailMsgBox/>
+          <EmailMsgBox handleSendMessage={this.handleSendMessage}/>
         </div>
 
       </div>
@@ -162,7 +169,7 @@ const mapStateToProps = (state, ownProps) => {
 // have access to signIn into our props
 const mapDispatchToProps = dispatch => {
   return {
-    sendMessage: (email, message) => dispatch(sendMessage(email, message)),
+    sendMessage: (email, message,chatroomId) => dispatch(sendMessage(email, message,chatroomId)),
     getSessions: () => dispatch(getSessions()),
     getAlgorithms: () => dispatch(getAlgorithms()),
     sendMessageAtT: (chatrooms,offset) => dispatch(sendMessageAtT(chatrooms,offset)),

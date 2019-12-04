@@ -1,12 +1,11 @@
 export const sendMessage = (email, message, chatroomId) => {  
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    var chatroom = firestore
-      .collection("chatrooms")
-      .doc(chatroomId);
-    // create unique message id by the chatroom id and time
+    
+    console.log(email,message,chatroomId)
+    
+    //create timeStamp for this message
     var timeStamp = Date.now();
-    var uniqueID = chatroom.id.toString() + "-" + timeStamp.toString();
     // add a new message doc into this chatroom
     firestore
       .collection("chatrooms")
