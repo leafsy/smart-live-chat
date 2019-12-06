@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import "../style.css";
 import TextBox from "./TextBox";
 import { connect } from "react-redux";
-import { sendMessage,getMessages,clearMessage} from "../../store/actions/chatActions";
+import {
+  sendMessage,
+  getMessages,
+  clearMessage
+} from "../../store/actions/chatActions";
 import { signOut } from "../../store/actions/authActions";
 import MessageList from "./MessageList";
 
@@ -10,10 +14,10 @@ class ChatRoom extends Component {
   constructor(props) {
     super(props);
 
-    const {chatroomId} = props;
-    this.props.getMessages(chatroomId)
+    const { chatroomId } = props;
+    this.props.getMessages(chatroomId);
   }
-  
+
   handleSendMessage = (e, msg) => {
     e.preventDefault();
     const auth = this.props.auth;
@@ -28,13 +32,14 @@ class ChatRoom extends Component {
     }
   };
 
-  onClick= (e)=>{
+  onClick = e => {
     this.props.signOut();
     this.props.clearMessage();
-  }
+  };
 
   render() {
     const { event, auth, chatroom, messages } = this.props;
+    console.log(this.props.profile);
     var messages_arr = [];
     if (messages) {
       messages_arr = Object.values(messages);
@@ -74,18 +79,17 @@ const mapStateToProps = (state, ownProps) => {
     messages: messages,
     auth: state.firebase.auth,
     email: email,
+    profile: state.firebase.profile
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    sendMessage: (email, message, chatroomId) => dispatch(sendMessage(email, message, chatroomId)),
-    getMessages: (chatroomId) => dispatch(getMessages(chatroomId)),
+    sendMessage: (email, message, chatroomId) =>
+      dispatch(sendMessage(email, message, chatroomId)),
+    getMessages: chatroomId => dispatch(getMessages(chatroomId)),
     clearMessage: () => dispatch(clearMessage()),
     signOut: () => dispatch(signOut())
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ChatRoom);
+export default connect(mapStateToProps, mapDispatchToProps)(ChatRoom);

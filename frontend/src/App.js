@@ -5,26 +5,26 @@ import MessageList from "./components/chatroom/MessageList";
 import TextBox from "./components/chatroom/TextBox";
 import SignIn from "./components/auth/SignIn";
 import Admin from "./components/admin/Admin";
-import {getChatroomId} from "./store/actions/chatActions";
+import { getChatroomId } from "./store/actions/chatActions";
 import SignUp from "./components/auth/SignUp";
 import ChatRoom from "./components/chatroom/ChatRoom";
 
 class App extends React.Component {
   state = {
-    chatroomId: undefined,
+    chatroomId: undefined
   };
 
   render() {
     const { auth, profile } = this.props;
 
     if (auth.uid) {
-      if(auth.uid ==  'roB7fvV8KGWhIlP07T6LPa6IPNb2'){
-        return <Admin/>;
-      }else{
-        if(this.props.chatroomId){
-          return <ChatRoom chatroomId={this.props.chatroomId}/>;
-        }else{
-          return null
+      if (auth.uid == "roB7fvV8KGWhIlP07T6LPa6IPNb2") {
+        return <Admin />;
+      } else {
+        if (this.props.chatroomId) {
+          return <ChatRoom chatroomId={this.props.chatroomId} />;
+        } else {
+          return null;
         }
         // return <ChatRoom videoId={this.state.videoId}/>;
       }
@@ -37,10 +37,10 @@ class App extends React.Component {
     let search = window.location.search;
     let params = new URLSearchParams(search);
     let videoId = params.get("v");
-    // videoId='a123456'
-    console.log("===componentDidMount===",videoId,this.props.uid)
-    if(this.props.uid){
-      this.props.getChatroomId(videoId,this.props.uid)
+    videoId = "a123456";
+    console.log("===componentDidMount===", videoId, this.props.uid);
+    if (this.props.uid) {
+      this.props.getChatroomId(videoId, this.props.uid);
     }
   }
 
@@ -49,13 +49,12 @@ class App extends React.Component {
     let params = new URLSearchParams(search);
     let videoId = params.get("v");
 
-    // videoId='a123456'
-    console.log("===componentDidUpdate===",videoId,this.props.uid)
-    if(this.props.uid){
-      this.props.getChatroomId(videoId,this.props.uid)
+    videoId = "a123456";
+    console.log("===componentDidUpdate===", videoId, this.props.uid);
+    if (this.props.uid) {
+      this.props.getChatroomId(videoId, this.props.uid);
     }
   }
-
 }
 const mapStateToProps = state => {
   console.log(state.firebase.auth.email);
@@ -70,9 +69,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getChatroomId: (videoId, chatroomId) => dispatch(getChatroomId(videoId, chatroomId)),
+    getChatroomId: (videoId, chatroomId) =>
+      dispatch(getChatroomId(videoId, chatroomId))
   };
 };
 
-
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
