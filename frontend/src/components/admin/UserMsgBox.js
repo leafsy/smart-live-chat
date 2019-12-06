@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import '../style.css'
 
-class EmailMsgBox extends Component {
+class UserMsgBox extends Component {
     state = {
         content: '',
-        email: '',
+        userName: '',
     }
 
-    onEmailChange = (e) => {
-        var email = e.target.value;
-        this.setState({...this.state, email: email})
+    onUserNameChange = (e) => {
+        var userName = e.target.value;
+        this.setState({...this.state, userName: userName})
     }
 
     onMsgChange = (e) => {
@@ -34,12 +34,12 @@ class EmailMsgBox extends Component {
                     this.cleanMsgBox();
                     }
                 }>
-                    Email:
+                    User Name:
                     <input className="textbox-input"
-                        type="text" id="email"
-                        value={this.state.email}
+                        type="text" id="userName"
+                        value={this.state.userName}
                         data-length="100"
-                        onChange={this.onEmailChange} />
+                        onChange={this.onUserNameChange} />
                     Msg:
                     <input className="textbox-input"
                         type="text" id="content"
@@ -56,4 +56,4 @@ class EmailMsgBox extends Component {
     }
 
 }
-export default EmailMsgBox
+export default UserMsgBox

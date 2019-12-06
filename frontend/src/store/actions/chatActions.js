@@ -1,8 +1,8 @@
-export const sendMessage = (email, message, chatroomId) => {  
+export const sendMessage = (userName, message, chatroomId) => {  
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     
-    console.log(email,message,chatroomId)
+    console.log(userName,message,chatroomId)
     
     //create timeStamp for this message
     var timeStamp = Date.now();
@@ -12,7 +12,7 @@ export const sendMessage = (email, message, chatroomId) => {
       .doc(chatroomId)
       .collection("messages")
       .add({
-        email: email,
+        userName: userName,
         content: message,
         timeStamp: timeStamp
       })
@@ -62,7 +62,7 @@ export const getMessages = (chatroomId) => {
           if (change.type === "added") {
             console.log(change.doc.data());
             updateMessages.push(
-              change.doc.data().email + ": " + change.doc.data().content
+              change.doc.data().userName + ": " + change.doc.data().content
             );
           }
         });

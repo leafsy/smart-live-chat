@@ -27,7 +27,8 @@ class ChatRoom extends Component {
       console.log("Please sign in! ");
     } else {
       var message = msg.body;
-      this.props.sendMessage(this.props.email, message, this.props.chatroomId);
+      console.log(this.props.profile.userName)
+      this.props.sendMessage(this.props.profile.userName, message, this.props.chatroomId);
       console.log("submitted!");
     }
   };
@@ -39,7 +40,7 @@ class ChatRoom extends Component {
 
   render() {
     const { event, auth, chatroom, messages } = this.props;
-    console.log(this.props.profile);
+    // console.log(this.props.profile.userName);
     var messages_arr = [];
     if (messages) {
       messages_arr = Object.values(messages);
@@ -84,8 +85,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    sendMessage: (email, message, chatroomId) =>
-      dispatch(sendMessage(email, message, chatroomId)),
+    sendMessage: (userName, message, chatroomId) =>
+      dispatch(sendMessage(userName, message, chatroomId)),
     getMessages: chatroomId => dispatch(getMessages(chatroomId)),
     clearMessage: () => dispatch(clearMessage()),
     signOut: () => dispatch(signOut())

@@ -103,7 +103,7 @@ export const sendMessageAtT = (chatrooms,offset) => {
     .get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
-          var message = {content: doc.data().content, email:doc.data().email}
+          var message = {content: doc.data().content, userName:doc.data().userName}
           console.log(message)
 
           chatrooms.forEach(chatroomid => {
@@ -114,7 +114,7 @@ export const sendMessageAtT = (chatrooms,offset) => {
             .doc(chatroomid)
             .collection("messages")
             .add({
-              email: doc.data().email,
+              userName: doc.data().userName,
               content: doc.data().content,
               timeStamp: timeStamp
             })

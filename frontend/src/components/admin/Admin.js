@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../style.css";
 import AlgorithmBox from "./AlgorithmBox";
 import Checkbox from "./Checkbox";
-import EmailMsgBox from "./EmailMsgBox";
+import UserMsgBox from "./UserMsgBox";
 import { getSessions, getAlgorithms,sendMessageAtT} from "../../store/actions/adminActions";
 import { sendMessage } from "../../store/actions/chatActions";
 import { connect } from "react-redux";
@@ -72,9 +72,8 @@ class Admin extends Component {
     Object.keys(this.state.checkboxes)
         .filter(checkbox => this.state.checkboxes[checkbox])
         .forEach(checkbox => {
-          this.props.sendMessage(box.email, box.content,checkbox);
+          this.props.sendMessage(box.userName, box.content,checkbox);
         });
-    // this.props.sendMessage(box.email, box.content);
   };
 
   render() {
@@ -149,7 +148,7 @@ class Admin extends Component {
         </div>
 
         <div className="row">
-          <EmailMsgBox handleSendMessage={this.handleSendMessage}/>
+          <UserMsgBox handleSendMessage={this.handleSendMessage}/>
         </div>
 
       </div>
@@ -169,7 +168,7 @@ const mapStateToProps = (state, ownProps) => {
 // have access to signIn into our props
 const mapDispatchToProps = dispatch => {
   return {
-    sendMessage: (email, message,chatroomId) => dispatch(sendMessage(email, message,chatroomId)),
+    sendMessage: (userName, message,chatroomId) => dispatch(sendMessage(userName, message,chatroomId)),
     getSessions: () => dispatch(getSessions()),
     getAlgorithms: () => dispatch(getAlgorithms()),
     sendMessageAtT: (chatrooms,offset) => dispatch(sendMessageAtT(chatrooms,offset)),
