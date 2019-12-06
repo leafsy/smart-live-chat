@@ -37,7 +37,7 @@ class App extends React.Component {
     let search = window.location.search;
     let params = new URLSearchParams(search);
     let videoId = params.get("v");
-    videoId='a123456'
+    // videoId='a123456'
     console.log("===componentDidMount===",videoId,this.props.uid)
     if(this.props.uid){
       this.props.getChatroomId(videoId,this.props.uid)
@@ -49,7 +49,7 @@ class App extends React.Component {
     let params = new URLSearchParams(search);
     let videoId = params.get("v");
 
-    videoId='a123456'
+    // videoId='a123456'
     console.log("===componentDidUpdate===",videoId,this.props.uid)
     if(this.props.uid){
       this.props.getChatroomId(videoId,this.props.uid)
