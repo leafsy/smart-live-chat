@@ -16,6 +16,14 @@ class ChatRoom extends Component {
 
     const { chatroomId } = props;
     this.props.getMessages(chatroomId);
+
+    this.myRef = React.createRef();
+    this.scrollToBottom = this.scrollToBottom.bind(this);
+
+  }
+
+  scrollToBottom = () =>{
+    this.myRef.current.scrollIntoView({ behavior: 'smooth' })
   }
 
   handleSendMessage = (e, msg) => {
@@ -31,12 +39,17 @@ class ChatRoom extends Component {
       this.props.sendMessage(this.props.profile.userName, message, this.props.chatroomId);
       console.log("submitted!");
     }
+
   };
 
   onClick = e => {
     this.props.signOut();
     this.props.clearMessage();
   };
+
+  componentDidUpdate(prevProps) {
+    this.scrollToBottom()
+  }
 
   render() {
     const { event, auth, chatroom, messages } = this.props;
@@ -58,10 +71,13 @@ class ChatRoom extends Component {
           />
         </div>
         <button onClick={this.onClick}>sign out</button>
+        <div ref={this.myRef} />
       </div>
     );
   }
 }
+
+
 
 const mapStateToProps = (state, ownProps) => {
   // console.log('log chatroom state: ', state)
