@@ -23,7 +23,7 @@ class ChatRoom extends Component {
   }
 
   scrollToBottom = () =>{
-    this.myRef.current.scrollIntoView({ behavior: 'smooth' })
+    this.myRef.current.scrollIntoView({ behavior: 'smooth' , block: "end"})
   }
 
   handleSendMessage = (e, msg) => {
