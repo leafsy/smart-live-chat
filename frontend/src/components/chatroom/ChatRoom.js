@@ -59,7 +59,7 @@ class ChatRoom extends Component {
       messages_arr = Object.values(messages);
     }
     return (
-      <div>
+      <div className="container">
         <MessageList messages_arr={messages_arr} auth={auth} />
         <div className="text-editor">
           <TextBox
@@ -70,7 +70,7 @@ class ChatRoom extends Component {
             handleSendMessage={this.handleSendMessage}
           />
         </div>
-        <button onClick={this.onClick}>sign out</button>
+        <button className="btn blue waves-effect waves-light" style={{margin:"1rem 0"}} onClick={this.onClick}>sign out</button>
         <div ref={this.myRef} />
       </div>
     );

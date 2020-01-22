@@ -1,0 +1,20 @@
+.row {
+  display: flex;
+  padding-top: 5px;
+  width: 800px;
+}
+
+.column {
+  flex: 50%;
+
+}
+
+th, td {
+  padding: 15px;
+}
+
+.divider{
+  width:15px;
+  height:auto;
+  display:inline-block;
+}

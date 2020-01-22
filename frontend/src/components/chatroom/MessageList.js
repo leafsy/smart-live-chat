@@ -11,7 +11,7 @@ class MessageList extends Component {
     const { messages_arr, auth } = this.props;
     console.log(messages_arr);
     return (
-      <div>
+      <div className="message-list">
         {messages_arr.map((message, index) => (
           <p key={index}>{message}</p>
         ))}

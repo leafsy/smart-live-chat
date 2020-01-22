@@ -33,7 +33,7 @@ class TextBox extends Component {
                         data-length="100"
                         onChange={this.onChange} />
                     <button disabled={buttonDisabled}
-                        className="btn-floating waves-effect waves-light material-icons red accent-2 right">
+                        className="btn-floating waves-effect waves-light material-icons blue right">
                         <i className="material-icons">send</i>
                     </button>
                 </form>

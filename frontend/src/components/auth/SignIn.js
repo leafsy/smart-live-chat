@@ -67,8 +67,8 @@ class SignIn extends Component {
             </div>
 
             <div className="input-field">
-              <button className="red accent-2 waves-effect waves-light btn">
-                Login
+              <button className="blue waves-effect waves-light btn">
+                SIGN IN
               </button>
               <div className="red-text accent-2-text">
                 {authError ? <p>{authError}</p> : null}
@@ -77,11 +77,11 @@ class SignIn extends Component {
             <p>Do not have an account yet?</p>
           </form>
           <span>
-            <button
+            <p className="signlink"
               onClick={() => this.setState({ ...this.state, isSignIn: false })}
             >
               Sign up here
-            </button>
+            </p>
           </span>
         </div>
       );
@@ -116,7 +116,7 @@ class SignIn extends Component {
             </div>
 
             <div className="input-field">
-              <button className="btn red accent-2 lighten-1 z-depth-0">
+              <button className="btn blue waves-effect waves-light">
                 Sign Up
               </button>
               <div className="red-text accent-2-text">
@@ -124,12 +124,13 @@ class SignIn extends Component {
               </div>
             </div>
           </form>
+          <p>Already have an account?</p>
           <span>
-            <button
+            <p className="signlink"
               onClick={() => this.setState({ ...this.state, isSignIn: true })}
             >
               Sign In here
-            </button>
+            </p>
           </span>
         </div>
       );

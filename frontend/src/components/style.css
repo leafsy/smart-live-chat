@@ -18,3 +18,41 @@ th, td {
   height:auto;
   display:inline-block;
 }
+
+
+.avatar{
+  /* color:red; */
+}
+
+
+.box{
+padding: 15px;
+height: 600px;
+overflow: scroll;
+/* border: 1px solid #ccc; */
+}
+
+
+
+.text-editor{
+  padding:15px;
+  background-color:#F7F7F7;
+  height:150px;
+}
+
+.textbox {
+  /* margin: 0.4rem auto; */
+  padding: 0 1.2rem 0.8rem;
+  width: 100%;
+}
+
+
+.signlink {
+  cursor: pointer;
+  color: #216FFF;
+  text-decoration: underline;
+}
+
+.message-list{
+  padding: 0 2rem;
+}
