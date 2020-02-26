@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "smartlivechat2019",
+  "private_key_id": "b9f7b728ee3ed6105ea90304c22dac3a0438f6b7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDXLSlOin19ydca\n/y4B08cmge1i8RemtE6EKNmvKkBgyes4Oj9ausoe6jmcbd4fu0sFkzlvYdf6nZrJ\nst7Sx/LChoMfUlrBpJyXkZNPTlJ2+nM+HoDDb1xd4HytohELylzpmE3/gXyGEPxn\nNBQfazZhpn7hTjBZKe1wU2Q4WxWuW/ZtZ9+hWXM1+kSeocSgV/O+AsnfinjGYiFT\nKw/eOq4anfP5q4YSqur4sqTYS5HQcM/0L3b4Jls5Fof5AWLFDwLaECBMGyCEjPqx\nExOxysZvrHwqnVt78D2PIrX3sGnNrDtL4h3bemxbGyEckusi2MMImO7iSyvwLnL6\nZ5qF66rPAgMBAAECggEAJ5mDGZY5JBYqRSijMejkpLySkHvoK2DRdlcCQM9Yy7c9\nV7q4gB0SJ4BZm+VIVLSmSN9gWZQ7KD8rBmWpxkbP8WbJ6NDCLRL7UpWS86xpVsYe\nwVbhwZXT/N7ccyP5WR8j3EWQTS5qWU309ZVLAsE7X9tBTHuUQESMEvj13707jzu9\nCgvxjT4oZezW9DxqVQxEEW+CWACOzr9jcKBUcWP5AzjRxUknTq5cpVchTEfR9f3B\njXhleticqWYcZ2I6xOPOzFCmWDptFUIHHVYOB/JzwTBzI7CFcIjXF336SQ1enXML\nF+V/5IvGeCdgAWe2iT4jYWpE8cMRW5R3elCokVwrEQKBgQDrEoQfKcMB0CMdHORW\nInWTnY5ukM2J/BPGeoSJGezH6QmHKgX61Top4v86+0yZEGAhlLmRRJX7nnC5W85Q\nGe75LAbNPlOj1j1Fcx8EFaqImWeBBhihxSTEJLbYA+8bfcRQB5Aq7Zej49WQ5yLH\n1WwBf0uscRsBBG7qdMjMJ71OuQKBgQDqVTOcRhia3tzjQ/HjiknY15i4dIV5iNJJ\nx922CrNDaWKRD9rvPI5V5xLEEApoNYLyheExYtzmz1WD9CWMkEiw7wTqsOFgHkCA\nrhrf37KOCMga1EsjWhOAB+8Q715nBbrzt0O2DcCWrCs4G0tVkLH1fAWolApBqSru\nym4o77rBxwKBgAZaMr3Q2Bc1c612uWjmd3zstgug2B0RdctYRjqaO77POlWvugek\nOXUmUDVc0x4TxjVCGp2lV9Q73Nn1dCbP/Jg5K1nihEoaIP++c6kdmMUmOBjRfFrq\nw+qU/2fo+04n4OU0vx2Z3A4uuve2d0clKk0EDpxzVgJ6BzFIxKBXtpLpAoGBAIgh\nJvJJ5lFR1pBQEF1XIL9Pv/CoAEIyMbea3Dm8zZcDybbrtwvz6dwNeOFdUC5pp8Cr\n9b5y6FFNcShO1OFrkE75C6orR0JHUMFwYzxa/6dzgovTeDL5SQq/kSoNZJIEyi56\n8GL6aj8dlZ3qfUEf5cHuYnskRTEPzVkbUBOH8L5RAoGAdS5/B58pNmIh09tSZ7rb\nVsXy0ceHua1bJnYI07sy4vdI7vQdsTv/VJbVMDQBbocatB0Ad72y+CYCsDAS1Yef\nCm9F/ZUPcie3JsrlGTdw3pLlapDWwvTGN57NM8tUHTcG8vJQ6tJ5frI6T+/UakkI\nlW8tbOqRI9NIhxxjGyTf+L8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-adznn@smartlivechat2019.iam.gserviceaccount.com",
+  "client_id": "110127871760241238779",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-adznn%40smartlivechat2019.iam.gserviceaccount.com"
+}
