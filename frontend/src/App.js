@@ -8,9 +8,11 @@ import Admin from "./components/admin/Admin";
 import { getChatroomId } from "./store/actions/chatActions";
 import SignUp from "./components/auth/SignUp";
 import ChatRoom from "./components/chatroom/ChatRoom";
+import Survey from "./components/chatroom/Survey";
 
 class App extends React.Component {
   state = {
+    vid: "a123456",
     chatroomId: undefined
   };
 
@@ -20,13 +22,10 @@ class App extends React.Component {
     if (auth.uid) {
       if (auth.uid == "roB7fvV8KGWhIlP07T6LPa6IPNb2") {
         return <Admin />;
+      } else if (this.props.chatroomId) {
+        return <ChatRoom chatroomId={this.props.chatroomId} />;
       } else {
-        if (this.props.chatroomId) {
-          return <ChatRoom chatroomId={this.props.chatroomId} />;
-        } else {
-          return null;
-        }
-        // return <ChatRoom videoId={this.state.videoId}/>;
+        return <Survey uid={this.props.uid} vid={this.state.vid} />;
       }
     } else {
       return <SignIn />;
@@ -34,23 +33,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    let search = window.location.search;
-    let params = new URLSearchParams(search);
+    let params = (new URL(document.location)).searchParams;
     let videoId = params.get("v");
-    videoId = "a123456";
-    console.log("===componentDidMount===", videoId, this.props.uid);
-    if (this.props.uid) {
-      this.props.getChatroomId(videoId, this.props.uid);
+    if (videoId) {
+      this.setState({ vid: videoId });
+    } else {
+      videoId = this.state.vid;
     }
-  }
-
-  componentDidUpdate(prevProps) {
-    let search = window.location.search;
-    let params = new URLSearchParams(search);
-    let videoId = params.get("v");
-
-    videoId = "a123456";
-    console.log("===componentDidUpdate===", videoId, this.props.uid);
+    console.log("===componentDidMount===", videoId, this.props.uid);
     if (this.props.uid) {
       this.props.getChatroomId(videoId, this.props.uid);
     }
