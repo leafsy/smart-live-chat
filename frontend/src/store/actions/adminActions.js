@@ -8,7 +8,12 @@ export const getSessions = () => {
     chatrooms.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
-          var session = {platform: doc.data().platform, streamid:doc.data().vid, chatroomid: doc.id}
+          var session = {
+            platform: doc.data().platform,
+            streamid:doc.data().vid,
+            chatroomid: doc.id,
+            createtime: doc.data().createtime
+          }
           sessions.push(session);
       });
 

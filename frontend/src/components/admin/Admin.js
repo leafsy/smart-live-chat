@@ -99,19 +99,22 @@ class Admin extends Component {
                         <th>Platform</th>
                         <th>Stream id</th>
                         <th>Chat Room</th>
+                        <th>Create Time</th>
                     </tr>
-                    {sessions.map((session,index) => (
+                    {sessions.sort((e1, e2) => e1.createtime - e2.createtime)
+                      .map((session,index) => (
                         <tr key={index}>
                             <th>
                             <Checkbox
                                 label = {session.chatroomid}
-                                isSelected={this.state.checkboxes[session.chatroomid]}
+                                isSelected={this.state.checkboxes[session.chatroomid] || false}
                                 onCheckboxChange={this.handleCheckboxChange}
                                 key={session.chatroomid}
                                 /></th>
                             <th>{session.platform}</th>
                             <th>{session.streamid}</th>
                             <th>{session.chatroomid}</th>
+                            <th>{new Date(session.createtime).toLocaleString()}</th>
                         </tr>
                     ))}
                 </tbody>

@@ -6,6 +6,7 @@ import TextBox from "./components/chatroom/TextBox";
 import SignIn from "./components/auth/SignIn";
 import Admin from "./components/admin/Admin";
 import { getChatroomId } from "./store/actions/chatActions";
+import { updateChatroomId } from "./store/actions/surveyActions";
 import SignUp from "./components/auth/SignUp";
 import ChatRoom from "./components/chatroom/ChatRoom";
 import Survey from "./components/chatroom/Survey";
@@ -25,7 +26,23 @@ class App extends React.Component {
       } else if (this.props.chatroomId) {
         return <ChatRoom chatroomId={this.props.chatroomId} />;
       } else {
-        return <Survey uid={this.props.uid} vid={this.state.vid} />;
+//        return <Survey uid={this.props.uid} vid={this.state.vid} />;
+        fetch("https://us-central1-smartlivechat2019.cloudfunctions.net/app" +
+          "/api/surveyanswer", {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: JSON.stringify({
+            uid: this.props.uid,
+            vid: this.state.vid,
+            answers: []
+          })
+        })
+        .then(res => res.json())
+        .then(data => this.props.updateChatroomId(data.cid));
+        return null;
       }
     } else {
       return <SignIn />;
@@ -60,7 +77,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getChatroomId: (videoId, chatroomId) =>
-      dispatch(getChatroomId(videoId, chatroomId))
+      dispatch(getChatroomId(videoId, chatroomId)),
+    updateChatroomId: (chatroomId) =>
+      dispatch(updateChatroomId(chatroomId))
   };
 };
 
