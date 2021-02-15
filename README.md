@@ -1,2 +1,2 @@
-# smart-live-chat-19fa
+# smart-live-chat
 Smart Live Chat Project
